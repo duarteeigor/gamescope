@@ -22,7 +22,7 @@ export default function Carrossel() {
                 const res = await fetch("/api/games")
                 const data = await res.json()
 
-                setGames(data.splice(10, 5))
+                setGames(data)
 
 
 
