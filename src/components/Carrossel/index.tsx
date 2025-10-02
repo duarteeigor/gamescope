@@ -1,38 +1,28 @@
 "use client"
 
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import { useState} from "react"
 
 import { Autoplay} from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css/bundle"
+import Link from "next/link"
 
 interface GameProps {
     id: number,
     name: string,
-    background_image: string
+    background_image: string 
 }
 
-export default function Carrossel() {
-    const [games, setGames] = useState<GameProps[]>()
+interface GameDataProps{
+    data: GameProps[]
+}
 
-    useEffect(() => {
-        async function getData() {
-            try {
-                const res = await fetch("/api/games")
-                const data = await res.json()
+export default function Carrossel({data}: GameDataProps) {
+    const [games, setGames] = useState<GameProps[]>(data)
+    //NEM PRECISARIA DESSE USESTATE, PODERIA FAZER O MAP DIRETO COM O DATA
 
-                setGames(data)
-
-
-
-            } catch (error) {
-                console.error(error)
-            }
-
-        }
-        getData()
-    }, [])
+   
     return (
         <div className="flex max-w-7xl w-full h-[50dvh] mx-auto">
             <Swiper
@@ -54,16 +44,17 @@ export default function Carrossel() {
                                 <span className="text-white px-1 font-extralight">explode o jogo dasomdowa ....</span>
 
                                 <div className="flex items-center gap-2">
-                                    <button className="p-2 px-4 bg-[#B88B3D] rounded-md text-white cursor-pointer">Saiba mais</button>
+                                    <Link href={`/games/${item.id}`}>
+                                        <button className="p-2 px-4 bg-[#B88B3D] rounded-md text-white cursor-pointer">Saiba mais</button>
+                                    </Link>
                                     <button className="text-white bg-[#141415] p-2 rounded-md cursor-pointer">Adicionar a lista</button>
                                 </div>
                             </div>
 
-                            <div className="flex-1">
+                            <div className="relative flex-1">
                                 <Image
                                     src={item.background_image}
-                                    height={500}
-                                    width={500}
+                                    fill
                                     className="object-cover h-full rounded-2xl"
                                     alt="game image"
                                     priority
@@ -77,19 +68,3 @@ export default function Carrossel() {
         </div>
     )
 }
-
-{/* <div key={item.id}>
-//                     <div className="flex-1">
-//                         <h1>{item.name}</h1>
-//                         <span>explode o jogo dasomdowa ....</span>
-
-//                         <div className="flex gap-2">
-//                             <button>Saiba mais</button>
-//                             <button>Adicionar a lista</button>
-//                         </div>
-//                     </div>
-
-//                     <div className="flex-1">
-//                         <Image src={item.background_image} width={300} height={300} className="w-full" alt="" />
-//                     </div>
-//                 </div> */}
