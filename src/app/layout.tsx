@@ -14,8 +14,22 @@ const geistMono = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Game Scope",
-  description: "Catalogo dos jogos do momento!",
+  title: "Game Scope - Site completo de consulta de jogos",
+  description: "Mais de 10 mil jogos separados e organizados para consultar com toda praticidade!",
+  keywords: ["games", "jogos"],
+  openGraph: {
+    images: [`${process.env.PROJECT_URL}/preview.png`]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: true
+    }
+  }
 };
 
 export default function RootLayout({
