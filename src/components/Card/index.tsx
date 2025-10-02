@@ -1,8 +1,10 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 
 interface CardProps {
+  id: number,
   image: string,
   title: string,
   gen: string,
@@ -10,9 +12,10 @@ interface CardProps {
   rating?: number
   lancamento?: string
 }
-export default function Card({ image, title, gen, plat, rating, lancamento }: CardProps) {
+export default function Card({ id,image, title, gen, plat, rating, lancamento }: CardProps) {
   return (
-    <div className="bg-[#1E1E1E] rounded-xl shadow-lg overflow-hidden w-64 hover:scale-105 transition-transform duration-300">
+    <Link href={`/games/${id}`}>
+      <div className="bg-[#1E1E1E] rounded-xl shadow-lg overflow-hidden w-64 hover:scale-105 transition-transform duration-300">
       <div className="relative flex flex-1 w-full  h-55">
         <Image
           src={image}
@@ -33,5 +36,6 @@ export default function Card({ image, title, gen, plat, rating, lancamento }: Ca
         <p className="text-white font-light text-sm">{lancamento}</p>
       </div>
     </div>
+    </Link>
   )
 }
