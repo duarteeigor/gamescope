@@ -9,4 +9,36 @@
   h1, h2, h3 {
     font-family: var(--font-montserrat), sans-serif;
   }
+
+  
 }
+
+/* Por padrão, bullets invisíveis */
+.swiper-bullets-hover .swiper-pagination-bullets {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* Quando o card (parent) estiver hover, mostrar bullets */
+.group:hover .swiper-bullets-hover .swiper-pagination-bullets {
+  opacity: 1;
+}
+
+/* Quadradinhos customizados */
+.swiper-bullets-hover .swiper-pagination-bullet {
+  width: 30px !important;
+  height: 4px !important;
+  background-color: #2A2A2A !important;
+  border-radius: 0 !important;
+  margin: 0 4px !important;
+  opacity: 1 !important;
+}
+
+/* Bullet ativo */
+.swiper-bullets-hover .swiper-pagination-bullet-active {
+  background-color: #B88B3D !important;
+}
+
+
+
+
