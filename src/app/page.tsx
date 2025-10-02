@@ -1,5 +1,6 @@
 import Card from "@/components/Card";
 import Carrossel from "@/components/Carrossel"
+import {getGames} from "@/lib/rawg"
 
 interface ItemProps {
   id: number
@@ -23,26 +24,35 @@ interface ItemProps {
 }
 
 export default async function Home() {
-  const response = await fetch("http://localhost:3000/api/games?ordering=-added&platforms=187,1")
-  const data = await response.json()
-  const result = await data.splice(0, 5)
+  const fetch = await getGames("-added", "4")
+  const result = fetch.splice(0, 5)
 
-  const responseLancamentos = await fetch("http://localhost:3000/api/games?ordering=-released&platforms=187,1")
-  const dataLanc = await responseLancamentos.json()
-  const resultLanc = await dataLanc.splice(1, 5)
+  const fetch2 = await getGames("-released", "187,1")
+  const resultLanc = fetch2.splice(1, 5)
 
-  console.log(resultLanc[0])
+  const fetch3 = await getGames("-added&page=2");
+  const resultCarrossel = fetch3
+
   return (
     <div className="bg-[#121212] h-[calc(100dvh-100px)] w-full flex flex-col">
       <div className="max-w-7xl mx-auto flex flex-col pb-10">
-        <Carrossel />
+        <Carrossel
+          data={resultCarrossel}
+        />
         <h2 className="mt-20 text-4xl text-white font-bold">Jogos populares</h2>
 
         <div className="flex gap-6 mt-8">
           {result && result.map((item: ItemProps) => (
 
-            <Card key={item.id} image={item.background_image} title={item.name} gen={item.genres[0].name} rating={item.rating} />
-
+            <Card
+              key={item.id}
+              id={item?.id}
+              image={item?.background_image}
+              title={item?.name}
+              gen={item?.genres[0]?.name}
+              rating={item?.rating}
+            />
+            
           ))}
         </div>
 
@@ -54,7 +64,17 @@ export default async function Home() {
             const dateFormated = date.toLocaleDateString("pt-br")
 
             return (
-              <Card key={item.id} image={item.background_image} title={item.name} gen={item.genres[0].name} plat={item.platforms[0].platform.name} lancamento={dateFormated} />
+
+              <Card
+                key={item.id}
+                id={item?.id}
+                image={item?.background_image}
+                title={item?.name}
+                gen={item?.genres[0].name}
+                plat={item?.platforms[0]?.platform?.name}
+                lancamento={dateFormated}
+              />
+
             )
 
           })}
