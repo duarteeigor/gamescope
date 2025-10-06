@@ -1,8 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    domains: ["media.rawg.io"], // autoriza esse domínio
+   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media.rawg.io',
+      },
+    ],
+    // qualities padrão podem ser usadas, ou apenas remova quality=100
   },
 };
 
