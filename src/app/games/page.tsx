@@ -38,7 +38,8 @@ export default async function AllGames(){
                     return(
                         
                         <CardGames  
-                            key={item.id} 
+                            key={item.id}
+                            id={item.id}
                             name={item?.name ?? "none"} 
                             background_image={item?.background_image} 
                             released={dateFormated} 
