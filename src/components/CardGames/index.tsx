@@ -6,8 +6,10 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/pagination"
+import Link from "next/link"
 
 interface CardGameProps {
+  id: number,
   background_image: string
   name: string
   added: number
@@ -17,6 +19,7 @@ interface CardGameProps {
 }
 
 export default function CardGames({
+  id,
   background_image,
   name,
   added,
@@ -46,7 +49,8 @@ export default function CardGames({
 
   return (
     <div className="relative w-[300px] h-[380px] overflow-visible">
-      <div
+      <Link href={`/games/${id}`}>
+        <div
         className="group relative w-full h-full bg-[#1E1E1E] rounded-t-2xl rounded-md transition-transform duration-200 transform-gpu origin-top hover:scale-105 hover:z-50 hover:shadow-2xl"
         onMouseLeave={handleMouseLeave}
       >
@@ -102,6 +106,7 @@ export default function CardGames({
           </div>
         </div>
       </div>
+      </Link>
     </div>
   )
 }
