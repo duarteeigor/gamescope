@@ -1,4 +1,5 @@
 import { getGameById } from "@/lib/rawg"
+import { Metadata } from "next"
 import Image from "next/image"
 
 interface GameDetailProps {
@@ -6,8 +7,6 @@ interface GameDetailProps {
   name: string
   description: string
   background_image: string
-  // Adicionei campos extras para simular mais dados do RAWG, como rating e plataformas
-  // Você pode expandir o getGameById para incluir esses se disponível na API
   rating?: number
   platforms?: Array<{
     platform: {
@@ -15,20 +14,35 @@ interface GameDetailProps {
       name: string
     }
   }>
-
-
   released?: string
   genres?: Array<{ name: string }>
 }
 
-export default async function GameDetail({
-  params,
-}: {
-  params: { id: string | number }
-}) {
+export async function generateMetadata({params}: {params: {id:string | number}}): Promise<Metadata> {
+    const {id} = params
+    try {
+      const response = await getGameById(id)
+
+      return{
+        title: response.name,
+        description: `${response.description.slice(0, 100)}...`,
+        openGraph: {
+          title: response.name,
+          images: response.background_image,
+          description: response.description
+        }
+      }
+    } catch (error) {
+      return {
+        title: "Game Scope - Site completo de consulta de jogos"
+      }
+    }
+
+}
+
+export default async function GameDetail({params}: {params: { id: string | number }}) {
   const { id } = params
   const response = await getGameById(id)
-  // Assumindo que a resposta agora inclui mais campos; ajuste conforme sua API
   const {
     description,
     name,
@@ -38,6 +52,7 @@ export default async function GameDetail({
     released = '',
     genres = []
   } = response as GameDetailProps
+ 
 
   return (
     <div className="h-full w-full relative flex flex-col bg-[#121212] text-gray-100">
