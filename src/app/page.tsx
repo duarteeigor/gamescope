@@ -35,7 +35,7 @@ export default async function Home() {
 
   return (
     <div className="bg-[#121212] h-[calc(100dvh-100px)] w-full flex flex-col">
-      <div className="max-w-7xl mx-auto flex flex-col pb-10">
+      <div className="max-w-7xl pt-[100px] mx-auto flex flex-col pb-10">
         <Carrossel
           data={resultCarrossel}
         />

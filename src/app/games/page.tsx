@@ -26,7 +26,7 @@ export default async function AllGames(){
     
     return(
         <main className="w-full">
-            <div className="max-w-7xl w-full mx-auto flex flex-col px-4">
+            <div className="max-w-7xl w-full mx-auto flex flex-col px-4 pt-[100px]">
 
                 <Input  />
                 <h1 className="text-4xl text-white font-bold mt-20 mb-20">Todos os jogos</h1>
