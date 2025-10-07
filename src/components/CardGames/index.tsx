@@ -51,7 +51,7 @@ export default function CardGames({
     <div className="relative w-[300px] h-[380px] overflow-visible">
       <Link href={`/games/${id}`}>
         <div
-        className="group relative w-full h-full bg-[#1E1E1E] rounded-t-2xl rounded-md transition-transform duration-200 transform-gpu origin-top hover:scale-105 hover:z-50 hover:shadow-2xl"
+        className="group relative w-full h-full bg-[#1E1E1E] rounded-t-2xl rounded-md transition-transform duration-200 transform-gpu origin-top hover:scale-105 hover:z-40 hover:shadow-2xl"
         onMouseLeave={handleMouseLeave}
       >
 
